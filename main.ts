@@ -1,7 +1,7 @@
 function start_level () {
     scene.setBackgroundColor(Math.randomRange(3, 7))
     count = 0
-    for (let index = 0; index <= 5 - nivel; index++) {
+    for (let index = 0; index <= 10 - nivel; index++) {
         mySprite2 = sprites.create(img`
 . . . . . . . . . . . . . . . . 
 . . . . . . 4 4 4 4 . . . . . . 
@@ -30,11 +30,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     info.changeScoreBy(1)
     otherSprite.destroy()
     otherSprite.startEffect(effects.smiles, 200)
-    if (count > 5 - nivel) {
+    if (count > 10 - nivel) {
         nivel += 1
         music.baDing.play()
         start_level()
-        game.over(true)
     } else {
         music.powerUp.play()
     }
@@ -43,7 +42,7 @@ let mySprite2: Sprite = null
 let count = 0
 let mySprite: Sprite = null
 let nivel = 0
-game.splash("!Corre!", "!Recoge los cofres!")
+game.splash("!Corre!", "!Recoge las esferas!")
 nivel = 1
 mySprite = sprites.create(img`
 . . . . . . f f f f f . . . . . 
