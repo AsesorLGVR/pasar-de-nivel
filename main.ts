@@ -1,7 +1,7 @@
 function start_level () {
     scene.setBackgroundColor(Math.randomRange(3, 7))
     count = 0
-    for (let index = 0; index <= 10 + nivel; index++) {
+    for (let index = 0; index <= 5 - nivel; index++) {
         mySprite2 = sprites.create(img`
 . . . . . . . . . . . . . . . . 
 . . . . . . 4 4 4 4 . . . . . . 
@@ -21,7 +21,7 @@ function start_level () {
 . . . . . . . . . . . . . . . . 
 `, SpriteKind.Food)
         mySprite2.setPosition(Math.randomRange(20, 140), Math.randomRange(20, 100))
-        mySprite.say("Nivel" + nivel, 1000)
+        mySprite.say("Nivel" + nivel, 5000)
         info.startCountdown(10)
     }
 }
@@ -29,11 +29,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     count += 1
     info.changeScoreBy(1)
     otherSprite.destroy()
-    otherSprite.startEffect(effects.fire, 200)
-    if (true) {
+    otherSprite.startEffect(effects.smiles, 200)
+    if (count > 5 - nivel) {
         nivel += 1
         music.baDing.play()
         start_level()
+        game.over(true)
     } else {
         music.powerUp.play()
     }
@@ -64,3 +65,4 @@ mySprite = sprites.create(img`
 `, SpriteKind.Player)
 controller.moveSprite(mySprite, 70, 70)
 start_level()
+mySprite.setFlag(SpriteFlag.StayInScreen, true)
